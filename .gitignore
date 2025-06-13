@@ -1,4 +1,21 @@
-resource/
+# Ignore Python virtual environment
+venv/
+
+# Ignore Rasa trained model files
 models/
-venv/   
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore dot folders (e.g., temporary Rasa runtime folders)
 .rasa/
+
+# Ignore log and HTTP client debug files
+*.log
+api.http
+
+# Ignore VSCode or other IDE config (optional)
+.vscode/

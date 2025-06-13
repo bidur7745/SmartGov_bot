@@ -2,37 +2,216 @@ version: "3.1"
 
 intents:
   - greet
-  - goodbye
+  - request_driving_license
+  - inform_number
+  - inform_firstname
+  - inform_middlename
+  - inform_lastname
+  - inform_date
+  - inform_addresstype
+  - inform_issuedistrict
+  - inform_email
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - say_yo
+  - goodbye
+  - thank
+  - start_new_application
+
+entities:
+  - phone_number
+  - firstname
+  - middlename
+  - lastname
+  - date
+  - citizenshipno
+  - addresstype
+  - issuedistrict
+  - issuedate
+  - email
+
+slots:
+  phone_number:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: phone_number
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: phone_number
+
+  firstname:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: firstname
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: firstname
+
+  middlename:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: middlename
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: middlename
+
+  lastname:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: lastname
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: lastname
+
+  dob:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: date
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: date
+
+  citizenshipno:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: citizenshipno
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: citizenshipno
+
+  addresstype:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: addresstype
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: addresstype
+
+  issuedistrict:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: issuedistrict
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: issuedistrict
+
+  issuedistrict_code:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+      conditions:
+      - active_loop: driving_license_form
+
+  issuedate:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: issuedate
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: issuedate
+
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: email
+    - type: from_text
+      conditions:
+      - active_loop: driving_license_form
+        requested_slot: email
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hello! I'm here to help you with filling  application. How can I assist you today?"
 
-  utter_whats_up:
-  - text: "Whats up muji"
+  utter_ask_phone_number:
+  - text: "What is your phone number?"
+  
+  utter_ask_firstname:
+  - text: "What is your first name?"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_ask_middlename:
+   - text: "What is your middle name? (You can say 'none' if you don't have one)"
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_ask_lastname:
+  - text: "What is your last name?"
 
-  utter_happy:
-  - text: "Great, carry on!"
+  utter_ask_dob:
+  - text: "What is your date of birth? (Please provide in YYYY-MM-DD format)"
+
+  utter_ask_citizenshipno:
+  - text: "What is your citizenship number?"
+
+  utter_ask_addresstype:
+  - text: "What type of address would you like to use? (permanent/temporary)"
+
+  utter_ask_issuedistrict:
+  - text: "Which district would you like your license issued from?"
+
+  utter_ask_issuedate:
+  - text: "When would you like your license to be issued? (Please provide in YYYY-MM-DD format)"
+
+  utter_ask_email:
+  - text: "What is your email address?"
+
+  utter_submit:
+  - text: "Thank you! I'm processing your driving license application now..."
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Goodbye! Have a great day!"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_default:
+  - text: "I'm sorry, I didn't understand that. Could you please rephrase?"
+
+forms:
+  driving_license_form:
+    required_slots:
+      - phone_number
+      - firstname
+      - middlename
+      - lastname
+      - dob
+      - citizenshipno
+      - addresstype
+      - issuedistrict
+      - issuedistrict_code
+      - issuedate
+      - email
+
+actions:
+  - action_set_issuedistrict_code
+  - validate_driving_license_form
+  - action_submit_driving_license
+  - action_reset_form
 
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  carry_over_slots_to_new_session: false

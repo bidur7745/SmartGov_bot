@@ -1,0 +1,20 @@
+### Submit Driving License Form
+POST http://localhost:5001/api/driving-license
+Content-Type: application/json
+
+{
+  "phone_number": "9819304355",
+  "firstname": "Ashish",
+  "middlename": "Kumar",
+  "lastname": "Limbu",
+  "dob": "2000-05-10",
+  "citizenshipno": "12345678",
+  "addresstype": "permanent",
+  "issuedistrict": "Jhapa",
+  "issuedistrict_code": "03",
+  "issuedate": "2015-10-15",
+  "email": "ashish@example.com"
+}
+
+### Get submitted data
+GET http://localhost:5001/api/driving-license/DL-25FAA480

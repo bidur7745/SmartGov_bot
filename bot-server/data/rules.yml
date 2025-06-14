@@ -1,31 +1,41 @@
 version: "3.1"
 
 rules:
-
-- rule: Say goodbye anytime the user says goodbye
+- rule: Handle greeting
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+    - intent: greet
+    - action: action_greet_user
 
-- rule: Say thanks
-  steps:
-  - intent: thank
-  - action: utter_greet
+# - rule: Greet the user
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - action: driving_license_form
+#   - active_loop: driving_license_form
 
+# - rule: Say goodbye anytime the user says goodbye
+#   steps:
+#   - intent: goodbye
+#   - action: utter_goodbye
 
-- rule: Submit driving license form
-  condition:
-  - active_loop: driving_license_form
-  steps:
-  - action: driving_license_form
-  - active_loop: null  
-  - action: action_set_issuedistrict_code
-  - action: action_submit_driving_license 
+# - rule: Say thanks
+#   steps:
+#   - intent: thank
+#   - action: utter_greet
 
-- rule: Reset form
-  steps:
-  - intent: start_new_application
-  - action: action_reset_form
-  - action: driving_license_form
-  - active_loop: driving_license_form
+# - rule: Submit driving license form
+#   condition:
+#   - active_loop: driving_license_form
+#   steps:
+#   - action: driving_license_form
+#   - active_loop: null  
+#   - action: action_set_issuedistrict_code
+#   - action: action_submit_driving_license 
+
+# - rule: Reset form
+#   steps:
+#   - intent: start_new_application
+#   - action: action_reset_form
+#   - action: driving_license_form
+#   - active_loop: driving_license_form
   

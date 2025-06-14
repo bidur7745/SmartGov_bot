@@ -16,12 +16,12 @@ intents:
 - start_new_application
 - thank
 entities:
-- lastname
-- date
-- firstname
-- phone_number
-- mpin
 - email
+- date
+- lastname
+- phone_number
+- firstname
+- mpin
 - citizenshipno
 - middlename
 - addresstype
@@ -52,6 +52,7 @@ slots:
     - type: from_intent
       intent: inform_number
       value: '123456'
+
   firstname:
     type: text
     influence_conversation: false
@@ -194,15 +195,16 @@ forms:
     - issuedate
     - email
 actions:
+- action_greet_user
+- action_set_issuedistrict_code
+- send_phone_number_to_backend
+- action_inform_number_slot_filling
+- send_mpin_to_backend
+- utter_greet
 - action_submit_driving_license
 - utter_ask_phone_number
-- action_inform_number_slot_filling
 - action_reset_form
-- send_mpin_to_backend
 - utter_ask_mpin
-- send_phone_number_to_backend
-- action_set_issuedistrict_code
-- utter_greet
 - validate_driving_license_form
 session_config:
   session_expiration_time: 60

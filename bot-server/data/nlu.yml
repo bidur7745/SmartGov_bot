@@ -45,32 +45,10 @@ nlu:
     - i need a driving license
 - intent: inform_number
   examples: |
-    - [123456](mpin)
-    - my mpin is [123456](mpin)
-    - [9819304355](phone_number)
-    - my phone number is [9719304355](phone_number)
-    - contact number [9823451033](phone_number)
-    - phone is [9800000000](phone_number)
-    - मेरो फोन नम्बर [९८५१०२३४५६७](phone_number) हो
-    - सम्पर्क नम्बर [९८४१२३४५६७८](phone_number) दिनुहोस्
-    - मोबाइल नम्बर [९८००००००००](phone_number)
-    - मलाई [९८११२२३३४४](phone_number) मा सम्पर्क गर्नुहोस्
-    - मेरो नम्बर [९८२३४५६७८९०](phone_number) हो
-    - तपाईं मलाई [९८०१२३४५६७](phone_number) मा कल गर्न सक्नुहुन्छ
-    - कृपया [९८१००१००१०](phone_number) मा फोन गर्नुहोस्
-    - मेरो मोबाइल [९८२००२००२०](phone_number)
-    - [९८५५०५०५०५](phone_number) मेरो नम्बर हो
-    - सम्पर्क गर्नको लागि [९८४०३०४०३०](phone_number) प्रयोग गर्नुहोस्
-    - [12345678](citizenshipno)
-    - my citizenship number is [12345678](citizenshipno)
-    - citizenship ID [87654321](citizenshipno)
-    - [56781234](citizenshipno) is my citizenship number
-    - मेरो नागरिकता नम्बर [12345678](citizenshipno) हो
-    - मेरो नागरिकता आईडी [87654321](citizenshipno) हो
-    - नागरिकता नम्बर [56781234](citizenshipno) हो
-    - [9876543210](phone_number)
-    - [227377](mpin)
-    - [12345678](phone_number)
+    - [444444](mpin)
+    - my phone number is [9819304355](phone_number)
+    - citizenship number is [12345678](citizenshipno)
+
 - intent: inform_firstname
   examples: |
     - [aases](firstname)
@@ -112,6 +90,7 @@ nlu:
     - मलाई [test.user@email.com](email) मा इमेल पठाउनुहोस्
     - मेरो इमेल [siwakotibidur7745@gmail.com](email) हो
     - [aaseslimbu2@gmail.com](email)
+    - [aaseslimbu2@gmail.com](email)
 - intent: inform_date
   examples: |
     - [1990-05-15](date)
@@ -132,6 +111,10 @@ nlu:
     - म [1993-02-22](date) मा जन्मिएको हुँ
     - [2001-11-25](date)
     - [2025-11-12](date)
+    - [2001-11-24](date)
+    - [2001-11-24](date)
+    - [2025-11-21](date)
+    - [2001-11-11](date)
 - intent: inform_addresstype
   examples: |
     - temporary

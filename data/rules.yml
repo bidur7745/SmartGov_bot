@@ -7,17 +7,25 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Say thanks
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: thank
+  - action: utter_greet
 
-- rule: Say 'yo man!!' anytime the user says yo
-  steps:
-  - intent: yo
-  - action: utter_iamabot
 
-- rule: respond to yo
+- rule: Submit driving license form
+  condition:
+  - active_loop: driving_license_form
   steps:
-  - intent: say_yo
-  - action: utter_whats_up
+  - action: driving_license_form
+  - active_loop: null  
+  - action: action_set_issuedistrict_code
+  - action: action_submit_driving_license 
+
+- rule: Reset form
+  steps:
+  - intent: start_new_application
+  - action: action_reset_form
+  - action: driving_license_form
+  - active_loop: driving_license_form
+  

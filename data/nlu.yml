@@ -1,65 +1,265 @@
 version: "3.1"
-
 nlu:
 - intent: greet
   examples: |
-    - hey
     - hello
     - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
     - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
+    - good morning
     - good afternoon
-
-- intent: goodbye
+    - greetings
+    - hi there
+    - hello there
+    - नमस्ते
+    - हाय
+    - हे त्यहाँ
+    - शुभ प्रभात
+    - शुभ अपराह्न
+    - अभिवादन
+    - हजुर, नमस्ते
+    - नमस्कार
+    - hang
+    - morang
+- intent: request_document_type
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
-
+    - license form
+    - I want to apply for a driving license
+    - I need a driving license
+    - help me get a driving license
+    - driving license application
+    - apply for license
+    - I want to get my license
+    - license application
+    - driving permit
+    - need driving permit
+    - म ड्राइभिङ लाइसेन्सको लागि आवेदन दिन चाहन्छु
+    - मलाई ड्राइभिङ लाइसेन्स चाहिएको छ
+    - मलाई ड्राइभिङ लाइसेन्स लिन मद्दत गर्नुहोस्
+    - ड्राइभिङ लाइसेन्स आवेदन
+    - लाइसेन्सको लागि आवेदन दिन चाहन्छु
+    - म आफ्नो लाइसेन्स पाउन चाहन्छु
+    - लाइसेन्स आवेदन
+    - ड्राइभिङ परमिट
+    - मलाई ड्राइभिङ परमिट चाहिन्छ
+    - need driving license
+    - i need a driving license
+- intent: inform_number
+  examples: |
+    - [123456](mpin)
+    - my mpin is [123456](mpin)
+    - [9819304355](phone_number)
+    - my phone number is [9719304355](phone_number)
+    - contact number [9823451033](phone_number)
+    - phone is [9800000000](phone_number)
+    - मेरो फोन नम्बर [९८५१०२३४५६७](phone_number) हो
+    - सम्पर्क नम्बर [९८४१२३४५६७८](phone_number) दिनुहोस्
+    - मोबाइल नम्बर [९८००००००००](phone_number)
+    - मलाई [९८११२२३३४४](phone_number) मा सम्पर्क गर्नुहोस्
+    - मेरो नम्बर [९८२३४५६७८९०](phone_number) हो
+    - तपाईं मलाई [९८०१२३४५६७](phone_number) मा कल गर्न सक्नुहुन्छ
+    - कृपया [९८१००१००१०](phone_number) मा फोन गर्नुहोस्
+    - मेरो मोबाइल [९८२००२००२०](phone_number)
+    - [९८५५०५०५०५](phone_number) मेरो नम्बर हो
+    - सम्पर्क गर्नको लागि [९८४०३०४०३०](phone_number) प्रयोग गर्नुहोस्
+    - [12345678](citizenshipno)
+    - my citizenship number is [12345678](citizenshipno)
+    - citizenship ID [87654321](citizenshipno)
+    - [56781234](citizenshipno) is my citizenship number
+    - मेरो नागरिकता नम्बर [12345678](citizenshipno) हो
+    - मेरो नागरिकता आईडी [87654321](citizenshipno) हो
+    - नागरिकता नम्बर [56781234](citizenshipno) हो
+    - [9876543210](phone_number)
+    - [227377](mpin)
+    - [12345678](phone_number)
+- intent: inform_firstname
+  examples: |
+    - [aases](firstname)
+    - my first name is [John](firstname)
+    - [Ashish](firstname) is my name
+    - I am [Jane](firstname)
+    - मेरो पहिलो नाम [आशिष](firstname) हो
+    - मेरो नाम [प्रिया](firstname) हो
+    - म [दीपक](firstname) हुँ
+    - [aases](firstname)
+- intent: inform_middlename
+  examples: |
+    - मेरो माझको नाम [कुमार](middlename) हो
+    - my middle name is [Kumar](middlename)
+    - [chamling](middlename)
+- intent: inform_lastname
+  examples: |
+    - [limbu](lastname)
+    - my last name is [Doe](lastname)
+    - surname is [Shrestha](lastname)
+    - [Gurung](lastname) is my last name
+    - मेरो थर [लिम्बु](lastname) हो
+    - मेरो परिवारको नाम [श्रेष्ठ](lastname) हो
+    - थर [गुरुङ](lastname) हो
+    - मेरो थर [पौडेल](lastname) हो
+    - [limbu](lastname)
+- intent: inform_email
+  examples: |
+    - my email is [john.doe@email.com](email)
+    - you can email me at [test@gmail.com](email)
+    - [hello@domain.com](email) is my email address
+    - मेरो इमेल [ashish.limbu@gmail.com](email) हो
+    - तपाईं मलाई [prija.budhathoki@yahoo.com](email) मा इमेल गर्न सक्नुहुन्छ
+    - मेरो इमेल ठेगाना [aleesa.acharya@nepalmail.com](email) हो
+    - मेरो इमेल [leesa.pradhan@hotmail.com](email) हो
+    - मलाई [parash.khulal@gmail.com](email) मा इमेल गर्नुहोस्
+    - मेरो इमेल ठेगाना [ocean.poudel@domain.com](email) हो
+    - तपाईं मलाई [dipesh.tamang@mail.com](email) मा सम्पर्क गर्न सक्नुहुन्छ
+    - मलाई [test.user@email.com](email) मा इमेल पठाउनुहोस्
+    - मेरो इमेल [siwakotibidur7745@gmail.com](email) हो
+    - [aaseslimbu2@gmail.com](email)
+- intent: inform_date
+  examples: |
+    - [1990-05-15](date)
+    - I was born on [1990-05-15](date)
+    - date of birth is [1985-12-20](date)
+    - my DOB is [2024-06-15](date)
+    - intent: inform_date
+    - मेरो जन्म मिति [2000-01-15](date) हो
+    - मेरो DOB [1998-07-20](date) हो
+    - म [1995-12-05](date) मा जन्मिएको हुँ
+    - जन्म मिति [1999-03-10](date) हो
+    - मेरो जन्म मिति [2001-09-25](date) हो
+    - म [1990-04-01](date) मा जन्मिएँ
+    - मेरो DOB [1988-11-30](date) हो
+    - म [2002-06-18](date) मा जन्मिएको हुँ
+    - मेरो जन्म मिति [1997-10-12](date) हो
+    - म [1993/02/22](date) मा जन्मिएको हुँ
+    - म [1993-02-22](date) मा जन्मिएको हुँ
+    - [2001-11-25](date)
+    - [2025-11-12](date)
+- intent: inform_addresstype
+  examples: |
+    - temporary
+    - permanent
+    - I have a [permanent](addresstype) address
+    - address type is [temporary](addresstype)
+    - it’s a [permanent](addresstype) residence
+    - मेरो ठेगाना [स्थायी](addresstype) हो
+    - मेरो ठेगाना प्रकार [अस्थायी](addresstype) हो
+    - मेरो address [अस्थायी] (addresstype) हो
+    - यो [स्थायी](addresstype) बसोबास हो
+    - म [अस्थायी](addresstype) ठेगानामा बस्छु
+    - यो ठेगाना [स्थायी](addresstype) हो
+    - मेरो बसोबास [अस्थायी](addresstype) हो
+    - ठेगाना प्रकार [स्थायी](addresstype) हो
+    - मैले दिएको ठेगाना [अस्थायी](addresstype) हो
+    - मेरो ठेगाना [स्थायी](addresstype) हो, अस्थायी होइन
+    - म हाल [अस्थायी](addresstype) ठेगानामा बस्दैछु
+- intent: inform_issuedistrict
+  examples: |
+    - [Kathmandu](issuedistrict)
+    - district of issue is [Kathmandu](issuedistrict)
+    - issued in [Lalitpur](issuedistrict)
+    - [Bhaktapur](issuedistrict) is my issue district
+    - नागरिकता जारी जिल्ला [काठमाडौँ](issuedistrict) हो
+    - [ललितपुर](issuedistrict) बाट जारी भएको हो
+    - मेरो जारी जिल्ला [भक्तपुर](issuedistrict) हो
+    - नागरिकता [झापा](issuedistrict) जिल्ला बाट लिएको हुँ
+    - मेरो कागजपत्र [मोरङ](issuedistrict) बाट जारी भएको हो
+    - [धनुषा](issuedistrict) जिल्ला हो, जहाँबाट नागरिकता जारी भएको हो
+    - [रुपन्देही](issuedistrict) हो मेरो जारी जिल्ला
+    - मेरो issue district [चितवन](issuedistrict) हो
+    - यो [नुवाकोट](issuedistrict) बाट इश्यू गरिएको हो
+    - [कैलाली](issuedistrict) मा मेरो नागरिकता जारी भएको हो
 - intent: affirm
   examples: |
     - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
+    - yeah
+    - yep
     - correct
-
+    - right
+    - that's right
+    - exactly
+    - sure
+    - absolutely
+    - हो
+    - हुन्छ
+    - ठीक छ
+    - सहि हो
+    - हो नि
+    - पक्का
+    - अवश्य
+    - बिलकुल
+    - हो, ठिक भन्या
+    - ठीकै हो
 - intent: deny
   examples: |
     - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
+    - nope
     - not really
-
-- intent: give_name
-
+    - incorrect
+    - wrong
+    - that's wrong
+    - not correct
+    - होइन
+    - हुदैन
+    - गलत हो
+    - ठिक छैन
+    - होइन, त्यो ठीक हैन
+    - होइन, त्यो गलत हो
+    - होईन नि
+    - होइन, पक्कै पनि हैन
+    - ठिक लागेन
+    - होइन, त्यो सहि हैन
+- intent: goodbye
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really 
-
-
-
-    
+    - goodbye
+    - bye
+    - see you later
+    - talk to you later
+    - farewell
+    - bye bye
+    - see ya
+    - बिदा हुन्छु
+    - फेरि भेटौंला
+    - पछिपछि कुरा गरौंला
+    - राम्रोसंग बस्नु
+    - शुभकामना
+    - बाइ
+    - बाइ बाइ
+    - पछि भेटौंला
+    - पछि कुरा गरौंला
+    - हजुर, अब बिदा
+- intent: start_new_application
+  examples: |
+    - new application
+    - start new form
+    - fresh application
+    - new driving license
+    - start over
+    - reset form
+    - clear form
+    - begin new application
+    - नयाँ आवेदन
+    - नयाँ फारम सुरु गर्नुहोस्
+    - नयाँ ड्राइभिङ लाइसेन्सको लागि आवेदन
+    - सुरुबाट सुरु गरौँ
+    - फारम रिसेट गर
+    - नयाँ प्रोसेस सुरु गर्नु छ
+    - नयाँ फारम भर्न चाहन्छु
+    - सब सुरुबाट गर्नुहोस्
+    - पुरानो हटाएर नयाँ सुरु गर
+    - फारम क्लियर गरी नयाँ सुरु गरौं
+- intent: thank
+  examples: |
+    - thanks
+    - thank you
+    - thanks a lot
+    - thank you so much
+    - appreciate it
+    - much appreciated
+    - धन्यवाद
+    - धेरै धन्यवाद
+    - धेरै धेरै धन्यवाद
+    - आभार
+    - तपाईंको सहयोगको लागि धन्यवाद
+    - सहयोग गरिदिनु भएकोमा धन्यवाद
+    - धन्यवाद है
+    - मनदेखि धन्यवाद
+    - धन्यवाद छ
+    - धेरै आभार व्यक्त गर्छु

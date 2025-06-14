@@ -2,29 +2,253 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: driving license application happy path
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - intent: request_document_type
+  - action: utter_ask_phone_number
+  - intent: inform_number  # <--- User's actual input with entities goes here
+    entities:
+      - phone_number: "9819304355"
+  - action: action_inform_number_slot_filling
+  - action: send_phone_number_to_backend
+  - action: utter_ask_mpin
+  - intent: inform_number  # <--- User provides MPIN
+    entities:
+      - mpin: "123456"
+  - action: action_inform_number_slot_filling # Action runs to process MPIN
+  - action: send_mpin_to_backend
+  - action: driving_license_form # Activate the form after initial number/mpin are handled
+  - active_loop: driving_license_form
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+# - story: start new application after completion
+#   steps:
+#   - intent: start_new_application
+#   - action: action_reset_form
+#   - action: driving_license_form
+#   - active_loop: driving_license_form
 
-- story: sad path 2
+
+- story: interactive_story_1
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: request_document_type
+  - slot_was_set:
+    - document_type: license
+  - action: utter_ask_phone_number
+  - intent: inform_number
+    entities:
+    - phone_number: '9876543210'
+  - slot_was_set:
+    - phone_number: '9876543210'
+  - slot_was_set:
+    - mpin: '123456'
+  - action: action_inform_number_slot_filling
+  - action: send_phone_number_to_backend
+  - slot_was_set:
+    - phone_number: '9876543210'
+  - action: utter_ask_mpin
+  - intent: inform_number
+    entities:
+    - phone_number: '227377'
+  - slot_was_set:
+    - phone_number: '227377'
+  - slot_was_set:
+    - mpin: '123456'
+  - intent: inform_number
+    entities:
+    - mpin: '227377'
+  - action: action_inform_number_slot_filling
+  - slot_was_set:
+    - mpin: '227377'
+  - action: send_mpin_to_backend
+  - action: send_mpin_to_backend
+  - slot_was_set:
+    - mpin: '227377'
+  - action: driving_license_form
+  - active_loop: driving_license_form
+  - slot_was_set:
+    - phone_number: '9819304355'
+  - slot_was_set:
+    - mpin: '227377'
+  - slot_was_set:
+    - requested_slot: firstname
+  - intent: inform_firstname
+    entities:
+    - firstname: aases
+  - slot_was_set:
+    - firstname: aases
+  - action: driving_license_form
+  - slot_was_set:
+    - firstname: aases
+  - slot_was_set:
+    - requested_slot: middlename
+  - intent: greet
+  - slot_was_set:
+    - middlename: hang
+  - action: driving_license_form
+  - slot_was_set:
+    - middlename: hang
+  - slot_was_set:
+    - requested_slot: lastname
+  - intent: inform_lastname
+    entities:
+    - lastname: limbu
+  - slot_was_set:
+    - lastname: limbu
+  - action: driving_license_form
+  - slot_was_set:
+    - lastname: limbu
+  - slot_was_set:
+    - requested_slot: dob
+  - intent: inform_date
+    entities:
+    - date: '2001-11-25'
+  - slot_was_set:
+    - dob: '2001-11-25'
+  - action: driving_license_form
+  - slot_was_set:
+    - dob: '2001-11-25'
+  - slot_was_set:
+    - requested_slot: citizenshipno
+  - intent: inform_number
+    entities:
+    - phone_number: '12345678'
+  - slot_was_set:
+    - phone_number: '12345678'
+  - slot_was_set:
+    - mpin: '123456'
+  - slot_was_set:
+    - citizenshipno: '12345678'
+  - intent: inform_number
+    entities:
+    - citizenshipno: '12345678'
+  - action: action_inform_number_slot_filling
+  - action: driving_license_form
+  - slot_was_set:
+    - requested_slot: citizenshipno
+  - intent: inform_number
+    entities:
+    - phone_number: '12345678'
+  - slot_was_set:
+    - phone_number: '12345678'
+  - slot_was_set:
+    - mpin: '123456'
+  - slot_was_set:
+    - citizenshipno: '12345678'
+  - action: driving_license_form
+  - slot_was_set:
+    - citizenshipno: '12345678'
+  - slot_was_set:
+    - requested_slot: addresstype
+  - intent: inform_addresstype
+  - slot_was_set:
+    - addresstype: temporary
+  - action: driving_license_form
+  - slot_was_set:
+    - addresstype: temporary
+  - slot_was_set:
+    - requested_slot: issuedistrict
+  - intent: greet
+  - slot_was_set:
+    - issuedistrict: morang
+  - action: driving_license_form
+  - slot_was_set:
+    - issuedistrict: morang
+  - slot_was_set:
+    - issuedistrict_code: '10009'
+  - slot_was_set:
+    - requested_slot: issuedate
+  - intent: inform_date
+    entities:
+    - date: '2025-11-12'
+  - slot_was_set:
+    - dob: '2025-11-12'
+  - slot_was_set:
+    - issuedate: '2025-11-12'
+  - action: driving_license_form
+  - slot_was_set:
+    - dob: null
+  - slot_was_set:
+    - issuedate: '2025-11-12'
+  - slot_was_set:
+    - requested_slot: dob
+  - intent: inform_date
+    entities:
+    - date: '2001-11-25'
+  - slot_was_set:
+    - dob: '2001-11-25'
+  - action: driving_license_form
+  - slot_was_set:
+    - dob: '2001-11-25'
+  - slot_was_set:
+    - requested_slot: email
+  - intent: inform_email
+    entities:
+    - email: aaseslimbu2@gmail.com
+  - slot_was_set:
+    - email: aaseslimbu2@gmail.com
+  - action: driving_license_form
+  - slot_was_set:
+    - email: aaseslimbu2@gmail.com
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_set_issuedistrict_code
+  - slot_was_set:
+    - issuedistrict_code: '10009'
+  - action: action_submit_driving_license
+  - slot_was_set:
+    - firstname: null
+  - slot_was_set:
+    - middlename: null
+  - slot_was_set:
+    - lastname: null
+  - slot_was_set:
+    - dob: null
+  - slot_was_set:
+    - citizenshipno: null
+  - slot_was_set:
+    - addresstype: null
+  - slot_was_set:
+    - issuedistrict: null
+  - slot_was_set:
+    - issuedistrict_code: null
+  - slot_was_set:
+    - issuedate: null
+  - slot_was_set:
+    - email: null
+  - intent: greet
+  - action: action_reset_form
+  - slot_was_set:
+    - phone_number: null
+  - slot_was_set:
+    - mpin: null
+  - slot_was_set:
+    - firstname: null
+  - slot_was_set:
+    - middlename: null
+  - slot_was_set:
+    - lastname: null
+  - slot_was_set:
+    - dob: null
+  - slot_was_set:
+    - citizenshipno: null
+  - slot_was_set:
+    - addresstype: null
+  - slot_was_set:
+    - issuedistrict: null
+  - slot_was_set:
+    - issuedistrict_code: null
+  - slot_was_set:
+    - issuedate: null
+  - slot_was_set:
+    - email: null
+  - action: action_default_fallback
+  - intent: greet
+  - action: utter_greet
+  - intent: request_document_type
+  - slot_was_set:
+    - document_type: license

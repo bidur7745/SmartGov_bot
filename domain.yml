@@ -1,46 +1,57 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - request_driving_license
-  - inform_number
-  - inform_firstname
-  - inform_middlename
-  - inform_lastname
-  - inform_date
-  - inform_addresstype
-  - inform_issuedistrict
-  - inform_email
-  - affirm
-  - deny
-  - goodbye
-  - thank
-  - start_new_application
-
+- affirm
+- deny
+- goodbye
+- greet
+- inform_addresstype
+- inform_date
+- inform_email
+- inform_firstname
+- inform_issuedistrict
+- inform_lastname
+- inform_middlename
+- inform_number
+- request_document_type
+- start_new_application
+- thank
 entities:
-  - phone_number
-  - firstname
-  - middlename
-  - lastname
-  - date
-  - citizenshipno
-  - addresstype
-  - issuedistrict
-  - issuedate
-  - email
-
+- lastname
+- date
+- firstname
+- phone_number
+- mpin
+- email
+- citizenshipno
+- middlename
+- addresstype
+- issuedistrict
+- issuedate
 slots:
+  document_type:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_intent
+      intent: request_document_type
+      value: license
   phone_number:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: phone_number
+    - type: from_intent
+      intent: inform_number
+      value: '9819304355'
+  mpin:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: phone_number
-    - type: from_text
-      conditions:
-      - active_loop: driving_license_form
-        requested_slot: phone_number
-
+      entity: mpin
+    - type: from_intent
+      intent: inform_number
+      value: '123456'
   firstname:
     type: text
     influence_conversation: false
@@ -51,7 +62,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: firstname
-
   middlename:
     type: text
     influence_conversation: false
@@ -62,7 +72,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: middlename
-
   lastname:
     type: text
     influence_conversation: false
@@ -73,7 +82,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: lastname
-
   dob:
     type: text
     influence_conversation: false
@@ -84,7 +92,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: date
-
   citizenshipno:
     type: text
     influence_conversation: false
@@ -95,7 +102,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: citizenshipno
-
   addresstype:
     type: text
     influence_conversation: false
@@ -106,7 +112,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: addresstype
-
   issuedistrict:
     type: text
     influence_conversation: false
@@ -117,7 +122,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: issuedistrict
-
   issuedistrict_code:
     type: text
     influence_conversation: false
@@ -125,7 +129,6 @@ slots:
     - type: custom
       conditions:
       - active_loop: driving_license_form
-
   issuedate:
     type: text
     influence_conversation: false
@@ -136,7 +139,6 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: issuedate
-
   email:
     type: text
     influence_conversation: false
@@ -147,71 +149,61 @@ slots:
       conditions:
       - active_loop: driving_license_form
         requested_slot: email
-
 responses:
   utter_greet:
-  - text: "Hello! I'm here to help you with filling  application. How can I assist you today?"
-
+  - text: Hello! I'm here to help you with filling  application. How can I assist you today?
   utter_ask_phone_number:
-  - text: "What is your phone number?"
-  
+  - text: What is your phone number?
+  utter_ask_mpin:
+  - text: What is your MPIN? (This is a 6-digit number used for verification)
   utter_ask_firstname:
-  - text: "What is your first name?"
-
+  - text: What is your first name?
   utter_ask_middlename:
-   - text: "What is your middle name? (You can say 'none' if you don't have one)"
-
+  - text: What is your middle name? (You can say 'none' if you don't have one)
   utter_ask_lastname:
-  - text: "What is your last name?"
-
+  - text: What is your last name?
   utter_ask_dob:
-  - text: "What is your date of birth? (Please provide in YYYY-MM-DD format)"
-
+  - text: What is your date of birth? (Please provide in YYYY-MM-DD format)
   utter_ask_citizenshipno:
-  - text: "What is your citizenship number?"
-
+  - text: What is your citizenship number?
   utter_ask_addresstype:
-  - text: "What type of address would you like to use? (permanent/temporary)"
-
+  - text: What type of address would you like to use? (permanent/temporary)
   utter_ask_issuedistrict:
-  - text: "Which district would you like your license issued from?"
-
+  - text: Which district would you like your license issued from?
   utter_ask_issuedate:
-  - text: "When would you like your license to be issued? (Please provide in YYYY-MM-DD format)"
-
+  - text: When would you like your license to be issued? (Please provide in YYYY-MM-DD format)
   utter_ask_email:
-  - text: "What is your email address?"
-
+  - text: What is your email address?
   utter_submit:
-  - text: "Thank you! I'm processing your driving license application now..."
-
+  - text: Thank you! I'm processing your driving license application now...
   utter_goodbye:
-  - text: "Goodbye! Have a great day!"
-
+  - text: Goodbye! Have a great day!
   utter_default:
-  - text: "I'm sorry, I didn't understand that. Could you please rephrase?"
-
+  - text: I'm sorry, I didn't understand that. Could you please rephrase?
 forms:
   driving_license_form:
     required_slots:
-      - phone_number
-      - firstname
-      - middlename
-      - lastname
-      - dob
-      - citizenshipno
-      - addresstype
-      - issuedistrict
-      - issuedistrict_code
-      - issuedate
-      - email
-
+    - firstname
+    - middlename
+    - lastname
+    - dob
+    - citizenshipno
+    - addresstype
+    - issuedistrict
+    - issuedistrict_code
+    - issuedate
+    - email
 actions:
-  - action_set_issuedistrict_code
-  - validate_driving_license_form
-  - action_submit_driving_license
-  - action_reset_form
-
+- action_submit_driving_license
+- utter_ask_phone_number
+- action_inform_number_slot_filling
+- action_reset_form
+- send_mpin_to_backend
+- utter_ask_mpin
+- send_phone_number_to_backend
+- action_set_issuedistrict_code
+- utter_greet
+- validate_driving_license_form
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: false

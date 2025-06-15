@@ -133,13 +133,6 @@ slots:
   issuedate:
     type: text
     influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: issuedate
-    - type: from_text
-      conditions:
-      - active_loop: driving_license_form
-        requested_slot: issuedate
   email:
     type: text
     influence_conversation: false
@@ -191,8 +184,6 @@ forms:
     - citizenshipno
     - addresstype
     - issuedistrict
-    - issuedistrict_code
-    - issuedate
     - email
 actions:
 - action_greet_user

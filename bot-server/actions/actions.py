@@ -6,7 +6,7 @@ from rasa_sdk.types import DomainDict
 from rasa_sdk.events import SlotSet
 import re
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 from typing import Any, Text, Dict, List
 
@@ -288,24 +288,12 @@ class ValidateDrivingLicenseForm(FormValidationAction):
             return {"addresstype": None}
         return {"addresstype": slot_value.lower()}
 
-    def validate_issuedate(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Validate issue date."""
-        try:
-            date_obj = datetime.strptime(slot_value, "%Y-%m-%d")
-            # Check if date is not in the past
-            if date_obj.date() < datetime.now().date():
-                dispatcher.utter_message(text="Issue date cannot be in the past.")
-                return {"issuedate": None}
-            return {"issuedate": slot_value}
-        except ValueError:
-            dispatcher.utter_message(text="Please provide date in YYYY-MM-DD format (e.g., 2024-06-15).")
-            return {"issuedate": None}
+    async def extract_issuedate(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[str, Any]
+        ) -> Dict[str, Any]:
+            # Set issuedate to 5 days from today
+            future_date = (datetime.today() + timedelta(days=5)).strftime("%Y-%m-%d")
+            return {"issuedate": future_date}
             
     def validate_issuedistrict(
         self,
